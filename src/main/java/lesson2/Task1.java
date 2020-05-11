@@ -1,5 +1,7 @@
 package lesson2;
 
+import org.testng.annotations.Test;
+
 /**
  * Реализовать у класса Task1 переменные age (тип int),  name (тип String), ageGroup(тип String)
  * реализовать методы геттеры и сеттеры для каждой переменной.
