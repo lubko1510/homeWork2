@@ -1,5 +1,5 @@
 
-package lesson1;
+package main.java.lesson1;
 
 /**
  * Реализовать функцию, которая принимает строку и возвращает ее же в обратном виде
@@ -11,8 +11,6 @@ public class Task5 {
     }
 
     public static String reverse(String str) {
-        System.out.println(str.length());
-        System.out.println(str.charAt(str.length()-1));
 
         String myString ="";
 
