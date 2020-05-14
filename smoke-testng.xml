@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="firsSuite">
+    <parameter name="parameterForTask2" value="Lubko Lubko Lubko Lubko Lubko Lubko Lubko Lubko "></parameter>
+    <test name="firstTest">
+        <classes>
+            <class name="testsHomeWork3.testForTask2"></class>
+        </classes>
+    </test>
+</suite>
