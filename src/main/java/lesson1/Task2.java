@@ -9,16 +9,21 @@ System.out.println, System.out.print можно использовать тол�
 public class Task2 {
 
     public static void main(String[] args) {
-        System.out.println(name10Times());
+        //System.out.print(name10Times("Lubko"));
     }
 
-    public static String name10Times() {
-        String someString = "";
-
-        for (int i = 0; i <=10 ; i++) {
-
+    public static String name10Times(String name) {
+        String resultName = "";
+        for (int y = 0; y < 5; y++) {
+            for (int i = 0; i < 10; i++) {
+                if (i < 9) {
+                    resultName = resultName + name + " ";
+                } else {
+                    resultName = resultName + name + "\n";
+                }
+            }
+        }
+            return resultName;
         }
 
-            return someString;
-        }
 }
