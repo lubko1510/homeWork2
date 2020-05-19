@@ -6,11 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.concurrent.TimeUnit;
 
 public class rozetkaTestCases {
     WebDriver driver;
@@ -29,9 +27,10 @@ public class rozetkaTestCases {
     }
 
     @Test
-    public void negativeTestForRegistration() throws InterruptedException {
+    public void negativeTestForRegistration() /*throws InterruptedException*/ {
         driver.get("https://rozetka.com.ua/");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.elementToBeClickable(personalOffice));
         WebElement personalOfficeLink = driver.findElement(personalOffice);
         wait.until(ExpectedConditions.elementToBeClickable(personalOfficeLink));
         personalOfficeLink.click();
@@ -40,21 +39,28 @@ public class rozetkaTestCases {
         wait.until(ExpectedConditions.elementToBeClickable(registerLink));
         registerLinkFromPopUp.click();
 
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 
+        wait.until(ExpectedConditions.elementToBeClickable(signUpButton));
         WebElement signUpButtonRegister = driver.findElement(signUpButton);
         signUpButtonRegister.click();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-        Thread.sleep(1000);
+
+        //driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+
+        wait.until(ExpectedConditions.attributeToBe(nameField, "border-color", "rgb(255, 120, 120)"));
+
+        //Змінив логіку - забрав асерти і добавив перевірку на wait.until + забрав Thread.sleep
+
+        /*Thread.sleep(1000);
 
         String actualResultBorderFieldsColor = driver.findElement(nameField).getCssValue("border-color");
         String expectedResultBorderColor = "rgb(255, 120, 120)";
 
-        Assert.assertEquals(actualResultBorderFieldsColor,expectedResultBorderColor);
+        Assert.assertEquals(actualResultBorderFieldsColor,expectedResultBorderColor);*/
     }
 
     @Test
-    public void negativeTestForRegistrationOneFieldIsNotEmpty() throws InterruptedException {
+    public void negativeTestForRegistrationOneFieldIsNotEmpty() {
         driver.get("https://my.rozetka.com.ua/signup/");
         WebElement nameField1 = driver.findElement(nameField);
         WebElement mailField1 = driver.findElement(mailField);
@@ -62,15 +68,19 @@ public class rozetkaTestCases {
 
         nameField1.sendKeys("Lubko");
         signUpButtonRegister.click();
-        Thread.sleep(5000);
 
-        String actualColorForEmptyField = mailField1.getCssValue("border-color");
+        wait.until(ExpectedConditions.attributeToBe(nameField1, "border-color", "rgb(210, 210, 210)"));
+        wait.until(ExpectedConditions.attributeToBe(mailField1, "border-color", "rgb(255, 120, 120)"));
+
+        //Тут також замінив фсершини на wait.until + забрав Thread.sleep
+
+        /*String actualColorForEmptyField = mailField1.getCssValue("border-color");
         String actualColorForNotEmptyField = nameField1.getCssValue("border-color");
         String expectedResultForEmptyField = "rgb(255, 120, 120)";
         String expectedResultForNotEmptyField = "rgb(210, 210, 210)";
 
         Assert.assertEquals(actualColorForNotEmptyField,expectedResultForNotEmptyField);
-        Assert.assertEquals(actualColorForEmptyField,expectedResultForEmptyField);
+        Assert.assertEquals(actualColorForEmptyField,expectedResultForEmptyField);*/
     }
 
     @AfterMethod
